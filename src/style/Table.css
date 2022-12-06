@@ -1,0 +1,21 @@
+table, th, td {
+    border: 1px solid black;
+}
+table {
+    width: 100%;
+}
+.daftar {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.edit {
+    background-color: lightgreen;
+}
+.delete {
+    background-color: red;
+}
+.Table {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+}

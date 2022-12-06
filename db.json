@@ -1,0 +1,18 @@
+{
+  "daftarbuku": [
+    {
+      "id": 1,
+      "judul": "Sikancil",
+      "deskripsi": "Si Kancil Mencuri Timun",
+      "pengarang": "Yudhistira Ikranegara",
+      "tahunTerbit": "1945"
+    },
+    {
+      "judul": "Keong Mass",
+      "deskripsi": "Cerita Rakyat Keong Mas yang melegenda",
+      "tahunTerbit": "1987",
+      "pengarang": "Ikranegara, Tira",
+      "id": 2
+    }
+  ]
+}
