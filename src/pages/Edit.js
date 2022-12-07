@@ -36,20 +36,20 @@ export default function Edit() {
   const submitActionHandler = async (e) => {
     e.preventDefault();
 
-     await axios
+     await 
+      Swal.fire({
+        title: 'apakah yakin di edit datanya?',
+        showCancelButton: true,
+        confirmButtonText: 'Edit',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
       .put("http://localhost:8000/daftarbuku/" + param.id, {
         judul: judul,
         deskripsi: deskripsi,
         tahunTerbit: tahunTerbit,
         pengarang: pengarang,
       })
-      Swal.fire({
-        title: 'apakah yakin di edit datanya?',
-        showCancelButton: true,
-        confirmButtonText: 'Edit',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
           Swal.fire('Berhasil Mengedit!', '', 'success')
         }
       })

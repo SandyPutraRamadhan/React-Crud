@@ -1,17 +1,17 @@
 {
   "users": [
     {
-      "id":1,
+      "id": 1,
       "username": "Sanz",
       "password": "123"
     }
   ],
   "daftarbuku": [
     {
-      "judul": "Si Kancil",
-      "deskripsi": "Cerita Fiksi ",
-      "tahunTerbit": "1678",
-      "pengarang": "Tidak Diketahui",
+      "judul": "sadvcsd",
+      "deskripsi": "vsdvsd",
+      "pengarang": "vsdv",
+      "tahunTerbit": "vsdvs",
       "id": 1
     }
   ]

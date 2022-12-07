@@ -18,8 +18,7 @@ export default function() {
   };
 
   const deleteBuku = async (id) => {
-    await axios.delete("http://localhost:8000/daftarbuku/" + id).then(() => {
-      Swal.fire({
+    Swal.fire({
         title: 'Apakah Yakin Ingin Delete?',
         icon: 'warning',
         showCancelButton: true,
@@ -28,6 +27,7 @@ export default function() {
         confirmButtonText: 'Tetap Delete!'
       }).then((result) => {
         if (result.isConfirmed) {
+          axios.delete("http://localhost:8000/daftarbuku/" + id)
           Swal.fire(
             'Berhasil Men Delete!',
             'File Anda Telah Di Delete',
@@ -36,7 +36,7 @@ export default function() {
           window.location.reload();
         }
       })
-    });
+
   };
 
   useEffect(() => {
