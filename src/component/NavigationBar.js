@@ -12,6 +12,7 @@ export default function NavigationBar() {
   const [tahunTerbit, setTahunTerbit] = useState("");
   const [pengarang, setPengarang] = useState("");
 
+  // Mengoper fungsi-fungsi ke dalam komponen
   const handleClose = () => setShow(false); 
   const handleShow = () => setShow(true);
   

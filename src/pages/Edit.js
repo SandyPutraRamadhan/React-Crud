@@ -1,10 +1,12 @@
 import axios from "axios";
+// Fungsi useState akan mereturn pasangan nilai dari state dan fungsi untuk mengubah state tersebut dalam bentuk sebuah array
 import React, { useState, useEffect } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useParams } from "react-router-dom";
 
 export default function Edit() {
+  // param digunakan dalam React routing, di mana kita memiliki parameter yang perlu kita akses di route
   const param = useParams();
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
@@ -13,6 +15,7 @@ export default function Edit() {
 
   const history = useHistory();
 
+  // React hooks useEffect digunakan untuk menambahkan side effect ke function komponen
   useEffect(() => {
     axios
       .get("http://localhost:8000/daftarbuku/" + param.id)
@@ -28,10 +31,11 @@ export default function Edit() {
       });
   },[]);
 
+  // Mengganti data lama menjadi data yang baru
   const submitActionHandler = async (e) => {
     e.preventDefault();
 
-    await axios
+     await axios
       .put("http://localhost:8000/daftarbuku/" + param.id, {
         judul: judul,
         deskripsi: deskripsi,
@@ -39,6 +43,7 @@ export default function Edit() {
         pengarang: pengarang,
       })
       .then(() => {
+        // Halaman pertama
         history.push("/");
       })
       .catch((error) => {

@@ -2,13 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 
-export default function () {
+export default function() {
   const [buku, setBuku] = useState([]);
-  const [judul, setJudul] = useState("");
-  const [deskripsi, setDeskripsi] = useState("");
-  const [tahunTerbit, setTahunTerbit] = useState("");
-  const [pengarang, setPengarang] = useState("");
-  const [bookId, setBookId] = useState(0);
 
   const getAllBuku = async () => {
     await axios
@@ -18,34 +13,6 @@ export default function () {
       })
       .catch((error) => {
         console.log("Terjadi Kesalahan " + error);
-      });
-  };
-
-  const getBukuById = (book) => {
-    setBookId(book.id);
-    setJudul(book.judul);
-    setDeskripsi(book.deskripsi);
-    setTahunTerbit(book.tahunTerbit);
-    setPengarang(book.pengarang);
-  };
-
-  const edit = async (e) => {
-    e.preventDefault();
-    await axios
-      .put("http://localhost:8000/daftarbuku/" + bookId, {
-        judul: judul,
-        deskripsi: deskripsi,
-        tahunTerbit: tahunTerbit,
-        pengarang: pengarang,
-      })
-      .then(() => {
-        setBookId(0);
-        alert("Succes");
-        window.location.reload();
-      })
-      .catch((err) => {
-        alert(err);
-        console.log(err);
       });
   };
 
