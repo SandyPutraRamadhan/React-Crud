@@ -34,6 +34,7 @@ export default function NavigationBar() {
         pengarang : pengarang,
         tahunTerbit : tahunTerbit
       })
+      window.location.reload(); 
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -42,7 +43,6 @@ export default function NavigationBar() {
         text: 'Something went wrong!',
       })
     }
-    window.location.reload(); 
 }
 
 const logout = () => {
