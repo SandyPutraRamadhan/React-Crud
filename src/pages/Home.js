@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 export default function() {
   const [buku, setBuku] = useState([]);
@@ -18,9 +19,24 @@ export default function() {
 
   const deleteBuku = async (id) => {
     await axios.delete("http://localhost:8000/daftarbuku/" + id).then(() => {
-      alert("Sukses Hapus");
+      Swal.fire({
+        title: 'Apakah Yakin Ingin Delete?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Tetap Delete!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Berhasil Men Delete!',
+            'File Anda Telah Di Delete',
+            'success'
+          )
+          window.location.reload();
+        }
+      })
     });
-    window.location.reload();
   };
 
   useEffect(() => {
@@ -35,7 +51,7 @@ export default function() {
           <th>Deskrpsi</th>
           <th>Tahun Terbit</th>
           <th>Pengarang</th>
-          <th>Action</th>
+          {localStorage.getItem("id") !== null ? <th>Action</th> : <></>}
         </thead>
         <tbody class="table-group-divider">
           {buku.map((book, index) => {
@@ -46,6 +62,7 @@ export default function() {
                 <td>{book.deskripsi}</td>
                 <td>{book.tahunTerbit}</td>
                 <td>{book.pengarang}</td>
+                {localStorage.getItem("id") !== null ? (
                 <td>
                   <Button
                     variant="danger"
@@ -60,6 +77,7 @@ export default function() {
                     </Button>
                   </a>
                 </td>
+                ) : <></>}
               </tr>
             );
           })}

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useParams } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function Edit() {
   // param digunakan dalam React routing, di mana kita memiliki parameter yang perlu kita akses di route
@@ -41,6 +42,16 @@ export default function Edit() {
         deskripsi: deskripsi,
         tahunTerbit: tahunTerbit,
         pengarang: pengarang,
+      })
+      Swal.fire({
+        title: 'apakah yakin di edit datanya?',
+        showCancelButton: true,
+        confirmButtonText: 'Edit',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Berhasil Mengedit!', '', 'success')
+        }
       })
       .then(() => {
         // Halaman pertama

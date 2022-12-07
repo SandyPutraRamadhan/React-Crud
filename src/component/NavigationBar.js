@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button, Form, InputGroup } from "react-bootstrap";
+import { useHistory} from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function NavigationBar() {
     const [show, setShow] = useState(false);
@@ -15,22 +17,39 @@ export default function NavigationBar() {
   // Mengoper fungsi-fungsi ke dalam komponen
   const handleClose = () => setShow(false); 
   const handleShow = () => setShow(true);
+
+  const history = useHistory();
   
   const addBuku = async(e) => {
     e.preventDefault();
 
     try {
-        await axios.post("http://localhost:8000/daftarbuku", {
-            judul : judul,
-            deskripsi : deskripsi,
-            pengarang : pengarang,
-            tahunTerbit : tahunTerbit
-        })
-        window.location.reload();
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil Menambahkan'
+      })
+      await axios.post("http://localhost:8000/daftarbuku", {
+        judul : judul,
+        deskripsi : deskripsi,
+        pengarang : pengarang,
+        tahunTerbit : tahunTerbit
+      })
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      })
     }
+    window.location.reload(); 
 }
+
+const logout = () => {
+  window.location.reload();
+  localStorage.clear();
+  history.push("/login");
+};
 
   return (
     <div>
@@ -46,9 +65,6 @@ export default function NavigationBar() {
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
         <li class="nav-item dropdown">
@@ -61,9 +77,21 @@ export default function NavigationBar() {
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#modal" onClick={handleShow}>Tambah Buku</a>
-        </li>
+
+        {localStorage.getItem('id') !== null ? (
+          <>
+          <li className="nav-item">
+            <button className="btn" onClick={handleShow}>Tambahkan Buku</button>
+          </li>
+          <li className="nav-item float-right">
+            <a className="btn" onClick={logout}>logout</a>
+          </li>
+          </>
+        ) : (
+          <li className="nav-item float-right">
+            <a className="btn" href="/login">Login</a>
+          </li>
+        )}
       </ul>
     </div>
   </div>
